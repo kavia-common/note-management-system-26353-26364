@@ -1,4 +1,14 @@
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
+/**
+ * Base URL for backend API.
+ * Prefer REACT_APP_API_BASE_URL from environment; otherwise default to the known backend port 3001.
+ * This ensures that in preview/dev, requests go to FastAPI at :3001 instead of the frontend dev server :3000.
+ * Example: https://vscode-internal-22120-qa.qa01.cloud.kavia.ai:3001
+ */
+const DEFAULT_BACKEND_BASE = 'https://vscode-internal-22120-qa.qa01.cloud.kavia.ai:3001';
+const API_BASE_URL = (process.env.REACT_APP_API_BASE_URL && process.env.REACT_APP_API_BASE_URL.trim() !== '')
+  ? process.env.REACT_APP_API_BASE_URL
+  : DEFAULT_BACKEND_BASE;
+
 const TOKEN_KEY = process.env.REACT_APP_AUTH_TOKEN_KEY || 'notes_auth_token';
 
 /**
